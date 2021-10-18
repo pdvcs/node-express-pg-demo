@@ -67,3 +67,7 @@ typings/
 # project-specific files we need to ignore
 .localkey
 .dbpasswd.enc
+svelte-components/node_modules/
+svelte-components/scripts/
+public/js/svelte-bundle*
+public/css/svelte-bundle*

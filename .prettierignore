@@ -1,0 +1,6 @@
+# Ignore artifacts:
+node_modules
+bin
+scratches
+public/js/svelte-bundle.js
+public/css/svelte-bundle.css

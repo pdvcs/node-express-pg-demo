@@ -1,13 +1,13 @@
-const prompt = require('prompt');
+const prompt = require("prompt");
 var CryptoJS = require("crypto-js");
-const fs = require('fs');
+const fs = require("fs");
 
 function readFile(fname) {
     var contents;
     try {
         contents = fs.readFileSync(fname, {
-            encoding: 'utf8',
-            flag: 'r'
+            encoding: "utf8",
+            flag: "r",
         });
     } catch (err) {
         console.log(err.message);
@@ -17,10 +17,10 @@ function readFile(fname) {
 }
 
 function writeEncPassword(ciphertext, fname) {
-    fs.writeFile(fname, ciphertext, err => {
+    fs.writeFile(fname, ciphertext, (err) => {
         if (err) {
-            console.error(err)
-            return
+            console.error(err);
+            return;
         }
     });
 }
@@ -28,9 +28,9 @@ function writeEncPassword(ciphertext, fname) {
 var schema = {
     properties: {
         cleartext: {
-            description: 'Please enter the string to protect (WILL be echoed)'
-        }
-    }
+            description: "Please enter the string to protect (WILL be echoed)",
+        },
+    },
 };
 
 function onErr(err) {
@@ -39,21 +39,26 @@ function onErr(err) {
 }
 
 function encrypt() {
-    const encFile = '.dbpasswd.enc';
-    var key = readFile('.localkey');
+    const encFile = ".dbpasswd.enc";
+    var key = readFile(".localkey");
     if (key != null) {
         prompt.start();
-        prompt.get(schema, function(err, result) {
+        prompt.get(schema, function (err, result) {
             if (err) {
                 return onErr(err);
             }
-            var ciphertext = CryptoJS.AES.encrypt(result.cleartext, key).toString();
+            var ciphertext = CryptoJS.AES.encrypt(
+                result.cleartext,
+                key
+            ).toString();
             console.log(`ciphertext: ${ciphertext}`);
-            console.log(`writing it to ${encFile}`)
+            console.log(`writing it to ${encFile}`);
             writeEncPassword(ciphertext, encFile);
         });
     } else {
-        console.log("could not read key contents, have you run ./localkey.sh first?");
+        console.log(
+            "could not read key contents, have you run ./localkey.sh first?"
+        );
         return 2;
     }
 }

@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const quotesSvc = require('../services/quotes');
+const quotesSvc = require("../services/quotes");
 
-/* GET quotes listing. */
-router.get('/', async function(req, res, next) {
+/* GET /quotes?page=xx */
+router.get("/", async function (req, res, next) {
     try {
         res.json(await quotesSvc.getMultiple(req.query.page));
     } catch (err) {
@@ -13,7 +13,7 @@ router.get('/', async function(req, res, next) {
 });
 
 /* POST quotes */
-router.post('/', async function(req, res, next) {
+router.post("/", async function (req, res, next) {
     try {
         res.json(await quotesSvc.create(req.body));
     } catch (err) {
@@ -21,6 +21,5 @@ router.post('/', async function(req, res, next) {
         next(err);
     }
 });
-
 
 module.exports = router;

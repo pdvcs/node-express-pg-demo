@@ -11,5 +11,5 @@ function emptyOrRows(rows) {
 
 module.exports = {
     getOffset,
-    emptyOrRows
-}
+    emptyOrRows,
+};
